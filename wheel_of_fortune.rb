@@ -1,18 +1,39 @@
 class WheelOfFortune
-  def initialize
-    p "Happy coding!"
+  attr_reader :guesses, :theme
+
+  def initialize(wheel_hash)
+    @phrase = wheel_hash[:phrase]
+    @theme = wheel_hash[:theme]
+    @guesses = []
+
+    if @phrase
+      @array = @phrase.gsub(/\w/, '_').chars
+      @guess_letter = @phrase.gsub(/\s/, '').length
+    end
   end
 
   def to_s
-    nil
+    @phrase
   end
 
   def can_i_have?(input)
-    nil
+    updated_input = input.downcase
+    @guesses.push updated_input
+    array = @phrase.downcase.chars
+
+    if array.include? updated_input
+      input_one = array.find_index updated_input
+      @new_array[input_one] = @phrase[input_one]
+      @guess_letter -= 1
+      return true
+
+    else
+      return false
+    end
   end
 
   def game_over?
-    nil
+    @guess_letter == 0
   end
 end
 

@@ -13,23 +13,23 @@ class WheelOfFortune
   end
 
   def to_s
-    @phrase
+    @array.join
   end
 
   def can_i_have?(input)
     updated_input = input.downcase
     @guesses.push updated_input
-    array = @phrase.downcase.chars
+    alt_array = @phrase.downcase.chars
 
-    if array.include? updated_input
-      input_one = array.find_index updated_input
-      @new_array[input_one] = @phrase[input_one]
-      @guess_letter -= 1
-      return true
+      if alt_array.include? updated_input
+        index = alt_array.find_index updated_input
+        @array[index] = @phrase[index]
+        @guess_letter -= 1
+        return true
 
-    else
-      return false
-    end
+      else
+        return false
+      end
   end
 
   def game_over?
